@@ -1,0 +1,20 @@
+*{
+    margin:10px;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    background-color: darkseagreen;
+}
+.chat{
+    background-color: aqua;
+}
+.sender{
+    background-color: blue;
+}
+.sender-image{
+    background-color: yellow;
+}
+.chat-message{
+    background-color: white;
+}
