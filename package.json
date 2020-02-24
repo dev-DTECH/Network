@@ -21,7 +21,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
-    // "socket.io" : "3.5.2"
+    "express": "^4.17.1",
+    "socket.io" : "3.5.2"
   }
 }
