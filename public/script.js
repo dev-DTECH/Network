@@ -9,9 +9,9 @@ socket.on("receive-chat", data => {
 	chat_box.innerHTML += `
     <div class="chat" id="other">
         <div class="sender">
+            <img src="${data.sender.image}" alt="" class="sender-image" />
             <div class="sender-name">${data.sender.name}</div>
-                <img src="${data.sender.image}" alt="" class="sender-image" />
-            </div>
+        </div>
         <div class="chat-message">${data.message}</div>
     </div>
     `;
@@ -21,11 +21,11 @@ socket.on("receive-chat", data => {
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
     chat_box.innerHTML += `
-    <div class="chat" id="you">
-        <div class="sender">
+    <div class="chat" id="you-chat">
+        <div class="sender" id="you-sender">
+            <img src="img.png" alt="" class="sender-image" />
             <div class="sender-name">${name}</div>
-                <img src="img.png" alt="" class="sender-image" />
-            </div>
+        </div>
         <div class="chat-message">${text.value}</div>
     </div>
     `;
