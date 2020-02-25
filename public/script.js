@@ -1,4 +1,4 @@
-let socket = io("http://localhost:3000/"),
+let socket = io(),
     chat_box = document.getElementById("chat-box"),
     form=document.getElementById("form"),
     text=document.getElementById("text"),
