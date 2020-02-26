@@ -6,16 +6,9 @@ let socket = io(),
     name=prompt("Enter the name that you want every one to know you with","Name")
 
 socket.on("receive-chat", data => {
-	chat_box.innerHTML += `
-    <div class="chat" id="other">
-        <div class="sender">
-            <img src="${data.sender.image}" alt="" class="sender-image" />
-            <div class="sender-name">${data.sender.name}</div>
-        </div>
-        <div class="chat-message">${data.message}</div>
-    </div>
-    `;
-	// console.log(data);
+	chat_box.innerHTML += data;
+    // console.log(data);
+    
 });
 
 form.addEventListener('submit',(e)=>{
@@ -29,12 +22,16 @@ form.addEventListener('submit',(e)=>{
         <div class="chat-message">${text.value}</div>
     </div>
     `;
-    socket.emit("send-chat",{
-        sender:{
-            name:name,
-            image:"img.png"
-        },
-        message:text.value
-    })
+    socket.emit("send-chat",`
+
+    <div class="chat">
+        <div class="sender">
+            <img src="img.png" alt="" class="sender-image" />
+            <div class="sender-name">${name}</div>
+        </div>
+        <div class="chat-message">${text.value}</div>
+    </div>
+    `
+    )
     text.value=''
 })
