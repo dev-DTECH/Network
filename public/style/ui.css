@@ -3,6 +3,9 @@
     padding:0;
     box-sizing: border-box;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color: darkseagreen;
 }
@@ -21,6 +24,7 @@ body{
     border-radius: 35px;
     background-color: #dddddd;
     max-width: 75vw;
+    justify-self: left;
 }
 .sender{
     display: flex;

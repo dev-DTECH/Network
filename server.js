@@ -15,19 +15,23 @@ app.get('/', function (req, res) {
   });
 
 let numuser = 0,
-  	chat="";
+  	chat=[];
 
 io.on("connection", socket => {
 	// console.log("user connected");
 
 	numuser++;
 	console.log("Number of user = " + numuser);
-	socket.emit("receive-chat",chat);
+	socket.emit("receive-chat-history",chat)
+
+	// socket.emit("receive-chat",chat);
 
 	socket.on("send-chat",data=>{
 		socket.broadcast.emit('receive-chat',data)
-		chat+=data
+		chat.push(data)
+		// console.log(chat)
 	})
+
 	socket.on("disconnect", () => {
 		// console.log("user disconnected");
 		numuser--;
