@@ -21,7 +21,7 @@ io.on("connection", socket => {
 	// console.log("user connected");
 
 	numuser++;
-	console.log("Number of user = " + numuser);
+	console.log("Number of user: " + numuser);
 	socket.emit("receive-chat-history",chat)
 
 	// socket.emit("receive-chat",chat);
@@ -35,6 +35,6 @@ io.on("connection", socket => {
 	socket.on("disconnect", () => {
 		// console.log("user disconnected");
 		numuser--;
-		console.log("Number of user = " + numuser);
+		console.log("Number of user: " + numuser);
 	});
 });

@@ -8,10 +8,34 @@
 	</head>
 	<body>
 		<nav id="navbar-top">
+			<img src="img.png" id="profile-image" alt="" srcset="" />
 			<h1>NETWORK</h1>
 		</nav>
-		<nav id="navbar-side"></nav>
 
+		<nav id="navbar-side">
+			<div id="tab">
+				<div id="new-chat">
+					<div>+</div>
+				</div>
+				<div id="new-chat">
+					<div>+</div>
+				</div>
+				<div id="new-chat">
+					<div>+</div>
+				</div>
+			</div>
+
+			<div id="menu">
+				<div id="new-chat">
+					<div>+</div>
+				</div>
+
+				<div id="setting">
+					<div id="logo">*</div>
+					<div>Setting</div>
+				</div>
+			</div>
+		</nav>
 
 		<div id="chat-box">
 			<!-- <div class="chat">
@@ -22,12 +46,13 @@
 				<div class="chat-message"></div>
 			</div> -->
 		</div>
+
 		<form action="" id="form" method="post">
-			<input type="text" id="text">
-			<input id="send-button" type="submit" value="SEND">
+			<input type="text" id="text" />
+			<input id="send-button" type="submit" value="SEND" />
 		</form>
 
-		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
 		<script src="script.js"></script>
 	</body>
 </html>

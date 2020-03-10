@@ -8,23 +8,31 @@ html{
 }
 body{
     background-color: darkseagreen;
+    /* min-height: 100vh; */
+
 }
 #chat-box{
-    display:grid ;
+    /* min-height: 100vh; */
+    z-index: -10;
+    display:grid;
     flex-direction: column;
-    background-color: darkseagreen;
-    margin-top: 37px;
+    /* background-color: darkseagreen; */
+    margin-top: 60px;
     margin-bottom: 60px;
+
+    right: 0;
+    /* width: calc(100vw - 60px) */
     
 }
 .chat{
     display:flex ;
     flex-direction: column;
-    margin: 10px;
-    border-radius: 35px;
+    border-radius: 35px 35px 35px 0;
     background-color: #dddddd;
-    max-width: 75vw;
+    max-width: 75%;
     justify-self: left;
+    margin: 10px;
+    margin-left: 70px;
 }
 .sender{
     display: flex;
@@ -45,7 +53,6 @@ body{
     width: 30px;
     height: 30px;
     border-radius: 50%;
-
     background-color: yellow;
 }
 .chat-message{
@@ -58,6 +65,8 @@ body{
 }
 #you-chat{
     justify-self: right;
+    border-radius: 35px 35px 0 35px;
+
 }
 #you-sender{
     flex-direction: row-reverse;
@@ -69,11 +78,11 @@ body{
     bottom: 0;
     backdrop-filter: blur(5px);
     -webkit-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
--moz-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
-width: 100%;
-
+    -moz-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
+    box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
+    width: 100%;
     padding: 10px;
+    z-index: 1;
 }
 #text{
     height: 40px;
@@ -99,11 +108,79 @@ width: 100%;
     -webkit-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
     box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
+    height: 60px;
+    z-index: 1;
 }
 h1{
     margin: auto;  
 
 }
 body{
-    height: calc(auto+60px);
+    z-index: -1000;
+}
+#navbar-side{
+    position: fixed;
+    left :0;
+    top: 0;
+    height :100vh;
+    width: 60px;
+    z-index: 0;
+    background-color: darkslateblue;
+    -webkit-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
+    box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.7);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    transition: width ease-in-out 0.5s;
+}
+/* #tab > div{
+
+    height: 40px;
+    min-width: 40px;
+    width: 1fr;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+
+    margin: 0 10px;
+    display: flex;
+    place-items: center;
+    color: white;
+    overflow: hidden;
+
+
+}
+#setting > #logo{
+
+    margin: 20px;
+    width: 40px;
+    background-color: black;
+}
+#navbar-side > div > div{ 
+    margin: 20px;
+}  */
+#navbar-side > div:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+#profile-image{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+}
+#navbar-side:hover{
+    width: 50%;
+}
+#setting{
+    bottom: 60px;
+    align-self: flex-end;
+}
+#separator{
+    margin: auto;
+}
+/* #navbar-top{
+    display: grid;
+} */
+#menu{
+    display: flex;
 }
