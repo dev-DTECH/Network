@@ -54,7 +54,7 @@ body {
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	background-color: yellow;
+	/* background-color: yellow; */
 }
 .chat-message {
 	margin: 10px;
@@ -217,7 +217,7 @@ body {
 #profile-image {
 	width: 40px;
 	height: 40px;
-	background-color: white;
+	/* background-color: white; */
 	border-radius: 50%;
 	margin: 5px;
 }
