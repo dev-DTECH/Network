@@ -6,11 +6,11 @@ let socket = io(),
 	user = {
 		sender: {
 			name:
-			 Math.random()
-		// prompt(
-		// 	"Enter the name that you want every one to know you with",
-		// 	"Name"
-		// )
+			//  Math.random()
+		prompt(
+			"Enter the name that you want every one to know you with",
+			"Name"
+		)
 		},
 
 		profile_image: "img.png"
