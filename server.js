@@ -2,13 +2,18 @@ let PORT = process.env.PORT || 3000,
 	express = require('express'),
 	fs = require("fs"),
 	app = require('express')(),
-	server = require('http').Server(app);
+	server = require('http').Server(app),
+	siofu = require("socketio-file-upload")
 
 let io = require("socket.io")(server);
 server.listen(PORT);
 console.log(`Server online at http://localhost:${PORT}`);
 
 app.use(express.static('public'))
+// app.use(express.static('./public/uploads'))
+
+
+app.use(siofu.router)
 
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/public/index.html');
@@ -31,6 +36,15 @@ io.on("connection", socket => {
 		chat.push(data)
 		// console.log(chat)
 	})
+	socket.on("send-file",data=>{
+		socket.broadcast.emit('receive-file',data)
+		chat.push(data)
+		// console.log(chat)
+	})
+
+	var uploader = new siofu();
+    uploader.dir = "./public/uploads/";
+    uploader.listen(socket);
 
 	socket.on("disconnect", () => {
 		// console.log("user disconnected");
