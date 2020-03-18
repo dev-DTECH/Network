@@ -34,13 +34,19 @@ io.on("connection", socket => {
 	socket.on("send-chat",data=>{
 		socket.broadcast.emit('receive-chat',data)
 		chat.push(data)
-		// console.log(chat)
+		console.log(chat)
 	})
 	socket.on("send-file",data=>{
 		socket.broadcast.emit('receive-file',data)
 		chat.push(data)
 		// console.log(chat)
 	})
+	socket.on("send-video-stream",data=>{
+		socket.broadcast.emit('receive-video-stream',data)
+		// chat.push(data)
+		// console.log(chat)
+	})
+
 
 	var uploader = new siofu();
     uploader.dir = "./public/uploads/";
