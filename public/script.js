@@ -18,6 +18,8 @@ let socket = io(),
 
 let lastchatdata, lastchatelement;
 
+let notification_audio=document.getElementById("notification-audio")
+
 console.log(user.sender.name);
 
 function updatelastchat(data) {
@@ -104,6 +106,7 @@ socket.on("receive-chat", data => {
     </div>
     `;
 	}
+	notification_audio.play();
 	scrollToBottom();
 	updatelastchat(data);
 	// console.log(data);
