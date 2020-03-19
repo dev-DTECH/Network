@@ -63,6 +63,17 @@ body {
 	padding: 10px;
 	max-width: calc(75vw - 20px);
 	background-color: white;
+	overflow: auto;
+}
+#youtube{
+		
+	position: sticky;
+	top: 0;
+	width: calc(75vw - 60px);
+	min-height: calc(75vh - 60px);
+	border: 0;
+	border-radius: 15px;
+
 }
 #you-chat {
 	justify-self: right;
@@ -325,4 +336,29 @@ body {
 }
 #file_drop > div{
 	margin: auto;
+}
+#file-link{
+	display: flex;
+	flex-direction: column;
+	border-radius: 15px;
+	background-color: #dddddd;
+	padding: 5px;
+	text-decoration: none;
+	
+
+}
+#file-link > img,#file-link > div{
+	margin: auto;
+	color: black;
+}
+#download-button{
+	margin-bottom: 10px;
+	padding: 5px;
+	text-decoration: none;
+	border-radius: 15px;
+	background-color: #85C1E9 ;
+	color: black;
+}
+@media only screen and (max-width: 600px){
+	
 }

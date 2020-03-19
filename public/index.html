@@ -50,14 +50,8 @@
 
 		<form action="" id="form" method="post">
 			<div id="text-box">
-				<input type="text" id="text" />
-				<img
-					onclick="showoptions()"
-					id="add-logo"
-					src="./style/add-logo.svg"
-					alt=""
-					srcset=""
-				/>
+				<input type="text" id="text" autofocus />
+				<img onclick="showoptions()" id="add-logo" src="./style/add-logo.svg" />
 			</div>
 			<input id="send-button" type="submit" value="" />
 		</form>
@@ -91,10 +85,15 @@
 			</div>
 
 			<div id="youtube-upload-form">
-
-				<button type="button" id="youtube-upload-button">SEND</button>
+				<label for="">URL: <input type="url" id="youtube-upload"/></label>
+				<button
+					type="button"
+					onclick="upload_youtube()"
+					id="youtube-upload-button"
+				>
+					SEND
+				</button>
 			</div>
-
 		</div>
 		<div onclick="hide_all_cards()" id="hide-all-cards"></div>
 

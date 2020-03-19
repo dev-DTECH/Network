@@ -34,10 +34,10 @@ io.on("connection", socket => {
 	socket.on("send-chat",data=>{
 		socket.broadcast.emit('receive-chat',data)
 		chat.push(data)
-		console.log(chat)
+		// console.log(chat)
 	})
 	socket.on("send-file",data=>{
-		socket.broadcast.emit('receive-file',data)
+		socket.broadcast.emit('receive-chat',data)
 		chat.push(data)
 		// console.log(chat)
 	})
