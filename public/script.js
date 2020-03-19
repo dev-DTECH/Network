@@ -1,3 +1,16 @@
+
+
+function escapeHtml(text) {
+	// (https://stackoverflow.com/a/4835406)
+	return text
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
+}
+
+
 let socket = io(),
 	chat_box = document.getElementById("chat-box"),
 	form = document.getElementById("form"),
@@ -111,9 +124,11 @@ socket.on("receive-chat", data => {
 form.addEventListener("submit", e => {
 	e.preventDefault();
 
+	var message = escapeHtml(text.value);
+
 	if (lastchatelement && lastchatdata.sender.name == user.sender.name) {
 		lastchatelement.innerHTML += `
-        <div class="chat-message">${text.value}</div>
+        <div class="chat-message">${message}</div>
         `;
 	} else {
 		chat_box.innerHTML += `
@@ -122,7 +137,7 @@ form.addEventListener("submit", e => {
                 <img src="img.png" alt="" class="sender-image" />
                 <div class="sender-name">${user.sender.name}</div>
             </div>
-            <div class="chat-message">${text.value}</div>
+            <div class="chat-message">${message}</div>
         </div>
         `;
 	}
@@ -133,7 +148,7 @@ form.addEventListener("submit", e => {
 			name: user.sender.name,
 			image: user.profile_image
 		},
-		message: text.value
+		message: message
 	});
 	text.value = "";
 });
