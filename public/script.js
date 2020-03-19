@@ -164,9 +164,15 @@ file_upload_button.addEventListener("click", e => {
 		if (lastchatelement && lastchatdata.sender.name == user.sender.name) {
 			lastchatelement.innerHTML += `
 			<div class="chat-message">
-				View: <a href="./uploads/${e1.file.name}">${e1.file.name}</a>
+				<a id="file-link" href="./uploads/${e1.file.name}">
+					<img src="./style/file-logo.svg" alt="" srcset="" />
+					<br>
+					<div>
+						${e1.file.name}
+					</div>
+				</a>
 				<br>
-				<a href="./uploads/${e1.file.name}" download>Download</a>
+				<a href="./uploads/${e1.file.name}" id="download-button" download>Download</a>
 			</div>
 			`;
 		} else {
