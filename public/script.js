@@ -1,7 +1,7 @@
 
 
 function escapeHtml(text) {
-	// (https://stackoverflow.com/a/4835406)
+
 	return text
 		.replace(/&/g, "&amp;")
 		.replace(/</g, "&lt;")
@@ -19,11 +19,11 @@ let socket = io(),
 	user = {
 		sender: {
 			name:
-			// Math.random()
-			prompt(
-				"Enter the name that you want every one to know you with",
-				"Name"
-			)
+			Math.random()
+			// prompt(
+			// 	"Enter the name that you want every one to know you with",
+			// 	"Name"
+			// )
 		},
 
 		profile_image: "img.png"
@@ -257,6 +257,27 @@ file_upload_button.addEventListener("click", e => {
 
 let youtube_upload=document.getElementById("youtube-upload");
 function upload_youtube(){
+	if (lastchatelement && lastchatdata.sender.name == user.sender.name) {
+		lastchatelement.innerHTML += `
+		<div class="chat-message">
+			<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
+		</div>
+        `;
+	} else {
+		chat_box.innerHTML += `
+        <div class="chat" id="you-chat">
+            <div class="sender" id="you-sender">
+                <img src="img.png" alt="" class="sender-image" />
+                <div class="sender-name">${user.sender.name}</div>
+            </div>
+			<div class="chat-message">
+				<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
+			</div>
+        </div>
+        `;
+	}
+	scrollToBottom();
+	updatelastchat(user);
 	socket.emit("send-chat",{
 		sender: {
 			name: user.sender.name,
@@ -266,6 +287,6 @@ function upload_youtube(){
 		<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
 		`
 	})
-	console.log(youtube_upload.value)
+	console.log(youtube_upload.value);
 }
 

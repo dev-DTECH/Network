@@ -35,6 +35,7 @@ body {
 	justify-self: left;
 	margin: 10px;
 	margin-left: 70px;
+	/* z-index: -1; */
 }
 .sender {
 	display: flex;
@@ -64,13 +65,14 @@ body {
 	max-width: calc(75vw - 20px);
 	background-color: white;
 	overflow: auto;
+	/* z-index: -2; */
 }
 #youtube{
-		
-	position: sticky;
-	top: 0;
+	/* z-index: 10;	 */
 	width: calc(75vw - 60px);
-	min-height: calc(75vh - 60px);
+	max-height: calc(100vh - 140px);
+
+	height: calc(75vw - 60px);
 	border: 0;
 	border-radius: 15px;
 
@@ -196,7 +198,7 @@ body {
 	-moz-box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.7);
 	box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.7);
 	height: 60px;
-	z-index: 1;
+	z-index: 2;
 }
 h1 {
 	margin: auto;
@@ -212,7 +214,7 @@ body {
 	top: 0;
 	height: 100vh;
 	width: 60px;
-	z-index: 0;
+	z-index: 1;
 	background-color: darkslateblue;
 	-webkit-box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.7);
 	-moz-box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.7);
@@ -224,19 +226,19 @@ body {
 #navbar-side:hover {
 	width: 50%;
 }
-/* #navbar-side > div:hover{
-    background-color: rgba(255, 255, 255, 0.2);
-} */
 #profile-image {
 	width: 40px;
 	height: 40px;
-	/* background-color: white; */
+	position: fixed;
+	top: 5px;
+	left: 5px;
 	border-radius: 50%;
 	margin: 5px;
-}
-#profile-image:hover  #navbar-side{
-	width: 50%;
+	z-index: 1000;
 
+}
+#profile-image:hover ~ #navbar-side{
+	width: 50%;
 }
 #chat-room {
 	display: flex;
@@ -360,5 +362,10 @@ body {
 	color: black;
 }
 @media only screen and (max-width: 600px){
-	
+	#navbar-side{
+		width: 0;
+	}
+	.chat{
+		margin-left: 10px;
+	}
 }
