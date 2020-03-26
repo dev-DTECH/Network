@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style/ui.css" />
+		<title>D.TECH | Network</title>
+	</head>
+	<body>
+		<img src="img.png" id="profile-image" alt="" srcset="" />
+
+		<nav id="navbar-top">
+			<h1>NETWORK</h1>
+			<a href="./data/">Data</a>
+		</nav>
+
+		<nav id="navbar-side">
+			<div id="chat-room">
+				<div id="DebdeepPal">
+					<div>DP</div>
+				</div>
+				<div id="DebdeepPal">
+					<div>DP</div>
+				</div>
+			</div>
+
+			<div id="menu">
+				<div id="new-chat">
+					<img src="./style/add-logo.svg" alt="" srcset="" />
+				</div>
+
+				<div id="settings">
+					<div id="settings-logo">
+						<img src="./style/settings-logo.svg" alt="" srcset="" />
+					</div>
+					<!-- <div>
+						Settings
+					</div> -->
+				</div>
+			</div>
+		</nav>
+
+		<div id="chat-box">
+			<!-- <div class="chat">
+				<div class="sender">
+					<div class="sender-name"></div>
+					<img src="" alt="" class="sender-image" />
+				</div>
+				<div class="chat-message"></div>
+			</div> -->
+		</div>
+
+		<form action="" id="form" method="post">
+			<div id="text-box">
+				
+				<input type="text" id="text" autofocus />
+				<img onclick="showoptions()" id="add-logo" src="./style/add-logo.svg" />
+			</div>
+			<input id="send-button" type="submit" value="" />
+		</form>
+
+		<div id="cards">
+			<div id="options">
+				<button onclick="Open('file')" type="button">
+					<img src="./style/file-logo.svg" alt="" srcset="" />
+				</button>
+				<button onclick="Open('youtube')" type="button">
+					<img
+						src="https://upload.wikimedia.org/wikipedia/commons/7/75/YouTube_social_white_squircle_%282017%29.svg"
+						alt=""
+						srcset=""
+					/>
+				</button>
+			</div>
+
+			<div id="file-upload-form">
+				<div for="Upload file">
+					<div id="file_drop">
+						<div>
+							Drop Files Here
+						</div>
+					</div>
+					<div style="margin: 10px;">or</div>
+					<input type="file" id="file-upload" />
+				</div>
+
+				<button type="button" id="file-upload-button">SEND</button>
+			</div>
+
+			<div id="youtube-upload-form">
+				<label for="">URL: <input type="url" id="youtube-upload"/></label>
+				<button
+					type="button"
+					onclick="upload_youtube()"
+					id="youtube-upload-button"
+				>
+					SEND
+				</button>
+			</div>
+		</div>
+		<div onclick="hide_all_cards()" id="hide-all-cards"></div>
+
+
+		<audio id="notification-audio" src="notification-audio.mp3">
+			<source src="notification-audio.mp3" type="audio/mp3">
+		</audio>
+
+		<script src="./style/script.js"></script>
+		<script src="socket.io/socket.io.js"></script>
+		<script src="siofu/client.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>

@@ -3,7 +3,12 @@ let PORT = process.env.PORT || 3000,
 	fs = require("fs"),
 	app = require('express')(),
 	server = require('http').Server(app),
-	siofu = require("socketio-file-upload")
+	siofu = require("socketio-file-upload");
+
+let passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const keys = require("./config");
+
 
 let io = require("socket.io")(server);
 server.listen(PORT);
@@ -58,3 +63,14 @@ io.on("connection", socket => {
 		console.log("Number of user: " + numuser);
 	});
 });
+
+passport.use(new GoogleStrategy({
+	clientID: keys.GOOGLE.clientID,
+	clientSecret: keys.GOOGLE.clientSecret,
+	callbackURL: "/auth/google/callback"
+},
+(accessToken, refreshToken, profile, cb) => {
+	console.log(profile);
+	user = { ...profile };
+	return cb(null, profile);
+}));
