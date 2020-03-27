@@ -14,12 +14,11 @@ let socket = io(),
 	send_button = document.getElementById("send-button"),
 	user = {
 		sender: {
-			name:
-				Math.random()
-				// prompt(
-				// 	"Enter the name that you want every one to know you with",
-				// 	"Name"
-				// )
+			name: Math.random()
+			// prompt(
+			// 	"Enter the name that you want every one to know you with",
+			// 	"Name"
+			// )
 		},
 
 		profile_image: "img.png"
@@ -41,15 +40,18 @@ var scrollToBottom = function() {
 	window.scrollTo(0, document.body.scrollHeight);
 };
 
-let login = document.getElementById("login")
+let login = document.getElementById("login");
 
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
-	user.sender.name=profile.getName();
-	console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	console.log("Name: " + profile.getName());
-	console.log("Image URL: " + profile.getImageUrl());
-	console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+	user.sender.name = profile.getName();
+	console.log(profile.getName());
+	login.style.display = "none";
+
+	// console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	// console.log("Name: " + profile.getName());
+	// console.log("Image URL: " + profile.getImageUrl());
+	// console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
 
 	socket.on("receive-chat-history", data => {
 		chat_box.innerHTML = "";
@@ -308,5 +310,6 @@ function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function() {
 		console.log("User signed out.");
+		login.style.display = "flex";
 	});
 }
