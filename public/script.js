@@ -15,11 +15,11 @@ let socket = io(),
 	user = {
 		sender: {
 			name:
-				// Math.random()
-				prompt(
-					"Enter the name that you want every one to know you with",
-					"Name"
-				)
+				Math.random()
+				// prompt(
+				// 	"Enter the name that you want every one to know you with",
+				// 	"Name"
+				// )
 		},
 
 		profile_image: "img.png"
@@ -41,8 +41,11 @@ var scrollToBottom = function() {
 	window.scrollTo(0, document.body.scrollHeight);
 };
 
+let login = document.getElementById("login")
+
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
+	user.sender.name=profile.getName();
 	console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
 	console.log("Name: " + profile.getName());
 	console.log("Image URL: " + profile.getImageUrl());
