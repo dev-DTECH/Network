@@ -397,6 +397,10 @@ body {
 	margin: 5px;
 }
 #login::before{
+	content: none;
+	position: fixed;
+	top: 0;
+	left: 0;
 	background-color: white;
 	width: 100vw;
 }
