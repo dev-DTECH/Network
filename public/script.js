@@ -45,94 +45,13 @@ let login = document.getElementById("login");
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
 	user.sender.name = profile.getName();
-	console.log(profile.getName());
+	console.log(profile);
+
 	login.style.display = "none";
+	document.getElementById("chat-box").style.display = "grid";
+	scrollToBottom();
 
-	// console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	// console.log("Name: " + profile.getName());
-	// console.log("Image URL: " + profile.getImageUrl());
-	// console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-
-	socket.on("receive-chat-history", data => {
-		chat_box.innerHTML = "";
-		data.forEach(chat => {
-			//message
-			if (chat.message) {
-				if (lastchatelement && lastchatdata.sender.name == chat.sender.name) {
-					lastchatelement.innerHTML += `
-				<div class="chat-message">${chat.message}</div>
-				`;
-				} else {
-					chat_box.innerHTML += `
-			<div class="chat" ${
-				chat.sender.name == user.sender.name ? 'id="you-chat"' : ""
-			}>
-				<div class="sender" ${
-					chat.sender.name == user.sender.name ? 'id="you-sender"' : ""
-				}>
-					<div class="sender-name">${chat.sender.name}</div>
-					<img src="${chat.sender.image}" alt="" class="sender-image" />
-				</div>
-				<div class="chat-message">${chat.message}</div>
-			</div>
-			`;
-				}
-				scrollToBottom();
-				updatelastchat(chat);
-			}
-			//file
-			// else if (chat.file_name) {
-			// 	if (lastchatelement && lastchatdata.sender.name == chat.sender.name) {
-			// 		lastchatelement.innerHTML += `
-			// 	<a href="./uploads/${chat.file_name}" class="chat-message" download>${chat.file_name}</a>
-			//     `;
-			// 	} else {
-			// 		chat_box.innerHTML += `
-			// <div class="chat" ${
-			// 			chat.sender.name == user.sender.name ? 'id="you-chat"' : ""
-			// 		}>
-			//     <div class="sender" ${
-			// 					chat.sender.name == user.sender.name ? 'id="you-sender"' : ""
-			// 				}>
-			//         <div class="sender-name">${chat.sender.name}</div>
-			//         <img src="${chat.sender.image}" alt="" class="sender-image" />
-			//     </div>
-			// 	P<a href="./uploads/${chat.file_name}" class="chat-message" download>${
-			// 			chat.file_name
-			// 		}</a>
-			// </div>
-			// `;
-			// 	}
-			// 	scrollToBottom();
-			// 	updatelastchat(chat);
-			// }
-		});
-	});
-
-	//message-receive
-
-	socket.on("receive-chat", data => {
-		if (lastchatelement && lastchatdata.sender.name == data.sender.name) {
-			lastchatelement.innerHTML += `
-        <div class="chat-message">${data.message}</div>
-        `;
-		} else {
-			chat_box.innerHTML += `
-    <div class="chat">
-        <div class="sender">
-            <img src="${data.sender.image}" alt="" class="sender-image" />
-            <div class="sender-name">${data.sender.name}</div>
-        </div>
-        <div class="chat-message">${data.message}</div>
-    </div>
-    `;
-		}
-		notification_audio.play();
-		scrollToBottom();
-		updatelastchat(data);
-		// console.log(data);
-	});
-
+	
 	form.addEventListener("submit", e => {
 		e.preventDefault();
 
@@ -140,18 +59,18 @@ function onSignIn(googleUser) {
 
 		if (lastchatelement && lastchatdata.sender.name == user.sender.name) {
 			lastchatelement.innerHTML += `
-        <div class="chat-message">${message}</div>
-        `;
+			<div class="chat-message">${message}</div>
+			`;
 		} else {
 			chat_box.innerHTML += `
-        <div class="chat" id="you-chat">
-            <div class="sender" id="you-sender">
-                <img src="img.png" alt="" class="sender-image" />
-                <div class="sender-name">${user.sender.name}</div>
-            </div>
-            <div class="chat-message">${message}</div>
-        </div>
-        `;
+			<div class="chat" id="you-chat">
+				<div class="sender" id="you-sender">
+					<img src="img.png" alt="" class="sender-image" />
+					<div class="sender-name">${user.sender.name}</div>
+				</div>
+				<div class="chat-message">${message}</div>
+			</div>
+			`;
 		}
 		scrollToBottom();
 		updatelastchat(user);
@@ -186,25 +105,6 @@ function onSignIn(googleUser) {
 			console.log(e1.file.name);
 			if (lastchatelement && lastchatdata.sender.name == user.sender.name) {
 				lastchatelement.innerHTML += `
-			<div class="chat-message">
-				<a id="file-link" href="./uploads/${e1.file.name}">
-					<img src="./style/file-logo.svg" alt="" srcset="" />
-					<br>
-					<div>
-						${e1.file.name}
-					</div>
-				</a>
-				<br>
-				<a href="./uploads/${e1.file.name}" id="download-button" download>Download</a>
-			</div>
-			`;
-			} else {
-				chat_box.innerHTML += `
-			<div class="chat" id="you-chat">
-				<div class="sender" id="you-sender">
-					<img src="img.png" alt="" class="sender-image" />
-					<div class="sender-name">${user.sender.name}</div>
-				</div>
 				<div class="chat-message">
 					<a id="file-link" href="./uploads/${e1.file.name}">
 						<img src="./style/file-logo.svg" alt="" srcset="" />
@@ -216,8 +116,27 @@ function onSignIn(googleUser) {
 					<br>
 					<a href="./uploads/${e1.file.name}" id="download-button" download>Download</a>
 				</div>
-			</div>
-			`;
+				`;
+			} else {
+				chat_box.innerHTML += `
+				<div class="chat" id="you-chat">
+					<div class="sender" id="you-sender">
+						<img src="img.png" alt="" class="sender-image" />
+						<div class="sender-name">${user.sender.name}</div>
+					</div>
+					<div class="chat-message">
+						<a id="file-link" href="./uploads/${e1.file.name}">
+							<img src="./style/file-logo.svg" alt="" srcset="" />
+							<br>
+							<div>
+								${e1.file.name}
+							</div>
+						</a>
+						<br>
+						<a href="./uploads/${e1.file.name}" id="download-button" download>Download</a>
+					</div>
+				</div>
+				`;
 			}
 			scrollToBottom();
 			updatelastchat(user);
@@ -227,16 +146,16 @@ function onSignIn(googleUser) {
 					image: user.profile_image
 				},
 				message: `
-			<a id="file-link" href="./uploads/${e1.file.name}">
-				<img src="./style/file-logo.svg" alt="" srcset="" />
+				<a id="file-link" href="./uploads/${e1.file.name}">
+					<img src="./style/file-logo.svg" alt="" srcset="" />
+					<br>
+					<div>
+						${e1.file.name}
+					</div>
+				</a>
 				<br>
-				<div>
-					${e1.file.name}
-				</div>
-			</a>
-			<br>
-			<a href="./uploads/${e1.file.name}" id="download-button" download>Download</a>		
-			`
+				<a href="./uploads/${e1.file.name}" id="download-button" download>Download</a>		
+				`
 			});
 		}
 	});
@@ -267,22 +186,22 @@ function onSignIn(googleUser) {
 	function upload_youtube() {
 		if (lastchatelement && lastchatdata.sender.name == user.sender.name) {
 			lastchatelement.innerHTML += `
-		<div class="chat-message">
-			<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
-		</div>
-        `;
-		} else {
-			chat_box.innerHTML += `
-        <div class="chat" id="you-chat">
-            <div class="sender" id="you-sender">
-                <img src="img.png" alt="" class="sender-image" />
-                <div class="sender-name">${user.sender.name}</div>
-            </div>
 			<div class="chat-message">
 				<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
 			</div>
-        </div>
-        `;
+			`;
+		} else {
+			chat_box.innerHTML += `
+			<div class="chat" id="you-chat">
+				<div class="sender" id="you-sender">
+					<img src="img.png" alt="" class="sender-image" />
+					<div class="sender-name">${user.sender.name}</div>
+				</div>
+				<div class="chat-message">
+					<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
+				</div>
+			</div>
+			`;
 		}
 		scrollToBottom();
 		updatelastchat(user);
@@ -292,16 +211,104 @@ function onSignIn(googleUser) {
 				image: user.profile_image
 			},
 			message: `
-		<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
-		`
+			<iframe id="youtube" src="${youtube_upload.value}" allowfullscreen></iframe>
+			`
 		});
 		console.log(youtube_upload.value);
 	}
 }
+// console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+// console.log("Name: " + profile.getName());
+// console.log("Image URL: " + profile.getImageUrl());
+// console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+socket.on("receive-chat-history", async data => {
+	chat_box.innerHTML = "";
+	data.forEach(chat => {
+		//message
+		if (chat.message) {
+			if (lastchatelement && lastchatdata.sender.name == chat.sender.name) {
+				lastchatelement.innerHTML += `
+				<div class="chat-message">${chat.message}</div>
+				`;
+			} else {
+				chat_box.innerHTML += `
+			<div class="chat" ${
+				chat.sender.name == user.sender.name ? 'id="you-chat"' : ""
+			}>
+				<div class="sender" ${
+					chat.sender.name == user.sender.name ? 'id="you-sender"' : ""
+				}>
+					<div class="sender-name">${chat.sender.name}</div>
+					<img src="${chat.sender.image}" alt="" class="sender-image" />
+				</div>
+				<div class="chat-message">${chat.message}</div>
+			</div>
+			`;
+			}
+			scrollToBottom();
+			updatelastchat(chat);
+		}
+		//file
+		// else if (chat.file_name) {
+		// 	if (lastchatelement && lastchatdata.sender.name == chat.sender.name) {
+		// 		lastchatelement.innerHTML += `
+		// 	<a href="./uploads/${chat.file_name}" class="chat-message" download>${chat.file_name}</a>
+		//     `;
+		// 	} else {
+		// 		chat_box.innerHTML += `
+		// <div class="chat" ${
+		// 			chat.sender.name == user.sender.name ? 'id="you-chat"' : ""
+		// 		}>
+		//     <div class="sender" ${
+		// 					chat.sender.name == user.sender.name ? 'id="you-sender"' : ""
+		// 				}>
+		//         <div class="sender-name">${chat.sender.name}</div>
+		//         <img src="${chat.sender.image}" alt="" class="sender-image" />
+		//     </div>
+		// 	P<a href="./uploads/${chat.file_name}" class="chat-message" download>${
+		// 			chat.file_name
+		// 		}</a>
+		// </div>
+		// `;
+		// 	}
+		// 	scrollToBottom();
+		// 	updatelastchat(chat);
+		// }
+	});
+});
+
+//message-receive
+
+socket.on("receive-chat", data => {
+	if (lastchatelement && lastchatdata.sender.name == data.sender.name) {
+		lastchatelement.innerHTML += `
+        <div class="chat-message">${data.message}</div>
+        `;
+	} else {
+		chat_box.innerHTML += `
+    <div class="chat">
+        <div class="sender">
+            <img src="${data.sender.image}" alt="" class="sender-image" />
+            <div class="sender-name">${data.sender.name}</div>
+        </div>
+        <div class="chat-message">${data.message}</div>
+    </div>
+    `;
+	}
+	notification_audio.play();
+	scrollToBottom();
+	updatelastchat(data);
+	// console.log(data);
+});
+
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function() {
 		console.log("User signed out.");
 		login.style.display = "flex";
+	document.getElementById("chat-box").style.display = "none";
+
+
 	});
 }

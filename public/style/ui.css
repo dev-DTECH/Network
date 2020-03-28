@@ -17,7 +17,7 @@ body {
 #chat-box {
 	/* min-height: 100vh; */
 	z-index: -10;
-	display: grid;
+	display: none;
 	flex-direction: column;
 	/* background-color: darkseagreen; */
 	margin-top: 60px;
