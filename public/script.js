@@ -50,7 +50,7 @@ function onSignIn(googleUser) {
 	login.style.display = "none";
 	document.getElementById("chat-box").style.display = "grid";
 	scrollToBottom();
-
+}
 	
 	form.addEventListener("submit", e => {
 		e.preventDefault();
@@ -216,7 +216,7 @@ function onSignIn(googleUser) {
 		});
 		console.log(youtube_upload.value);
 	}
-}
+
 // console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
 // console.log("Name: " + profile.getName());
 // console.log("Image URL: " + profile.getImageUrl());
